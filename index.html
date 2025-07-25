@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lux Products</title>
+  <style>
+    /* Fonts & Reset */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+      color: white;
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Optimized falling circles - reduced frequency and improved performance */
+    .falling-circle {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      animation: fallAndFade linear infinite;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fallAndFade {
+      0% {
+        transform: translate3d(0, -100px, 0);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(100px, 100vh, 0);
+        opacity: 0;
+      }
+    }
+
+    /* Glass effect container */
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.75rem;
+    }
+
+    /* Glow effect */
+    .glow-effect {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(107, 114, 128, 0.5);
+      background: rgba(255 255 255 / 0.05);
+      backdrop-filter: blur(15px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-image {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      object-fit: cover;
+      user-select: none;
+    }
+
+    /* Improved navigation spacing */
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 1rem;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    nav button:hover {
+      color: #3b82f6;
+      transform: translateY(-2px);
+    }
+
+    nav button.active,
+    nav button.active:hover {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 0 12px #3b82f6;
+      transform: translateY(-2px);
+    }
+
+    /* Main content */
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Tabs */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hero section */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: #a1a1aa;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-glow {
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      padding: 1rem 3rem;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 700;
+      cursor: default;
+      border: none;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      animation: bounce 1.5s infinite;
+      transition: none;
+      user-select: none;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Advantages grid */
+    .advantages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .advantage-card {
+      padding: 1.5rem;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 1rem;
+      border: 1px solid rgba(255 255 255 / 0.2);
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .advantage-card:hover {
+      transform: scale(1.05);
+    }
+
+    .adv-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .adv-title {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .adv-desc {
+      font-size: 0.875rem;
+      color: #a1a1aa;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    details {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255 255 255 / 0.2);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    details:hover {
+      transform: scale(1.02);
+    }
+
+    summary {
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary::after {
+      content: "▲";
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+
+    details summary::after {
+      content: "▼";
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    details p {
+      margin-top: 0.75rem;
+      color: #a1a1aa;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    /* Product Categories Section */
+    .product-category {
+      margin-bottom: 3rem;
+    }
+
+    .category-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .category-header h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-header p {
+      color: #a1a1aa;
+      font-size: 1rem;
+    }
+
+    /* Product Cards */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: linear-gradient(145deg, #1f2937, #374151);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(107, 114, 128, 0.5);
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      color: white;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 0 20px #3b82f6;
+    }
+
+    .product-name {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      user-select: text;
+    }
+
+    .product-desc {
+      flex-grow: 1;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+
+    .btn-buy {
+      background: #3b82f6;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+      align-self: flex-start;
+    }
+
+    .btn-buy:hover {
+      background: #2563eb;
+    }
+
+    /* Reviews Section - Optimized */
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .reviews-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .reviews-header p {
+      color: #a1a1aa;
+      font-size: 1.1rem;
+    }
+
+    .reviews-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .review-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      width: 320px;
+      max-width: 90vw;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateX(100vw);
+      animation: slideReviewOptimized 8s linear forwards;
+      will-change: transform, opacity;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+    }
+
+    @keyframes slideReviewOptimized {
+      0% {
+        transform: translateX(calc(50vw + 160px)) translateY(-50%);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      15%, 85% {
+        transform: translateX(-50%) translateY(-50%);
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(calc(-50vw - 160px)) translateY(-50%);
+        opacity: 0;
+      }
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .review-info h4 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .star {
+      color: #fbbf24;
+      font-size: 0.9rem;
+    }
+
+    .review-text {
+      color: #e2e8f0;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    /* Discord Button */
+    .discord-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #5865f2;
+      border-radius: 9999px;
+      padding: 0.75rem 1.25rem;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 0 15px #5865f2;
+      transition: background 0.3s ease;
+      z-index: 20;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .discord-btn:hover {
+      background: #4752c4;
+      box-shadow: 0 0 25px #4752c4;
+    }
+
+    .discord-logo {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      flex-shrink: 0;
+    }
+
+    /* Animated tab hover underline */
+    nav button::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      bottom: 6px;
+      width: 0;
+      height: 3px;
+      background: #3b82f6;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+      pointer-events: none;
+    }
+
+    nav button:hover::after,
+    nav button.active::after {
+      width: 80%;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      nav button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero h2 {
+        font-size: 2.25rem;
+      }
+
+      .review-card {
+        width: 280px;
+        padding: 1rem;
+      }
+
+      @keyframes slideReviewOptimized {
+        0% {
+          transform: translateX(100vw) translateY(-50%);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        15%, 85% {
+          transform: translateX(calc(50vw - 140px)) translateY(-50%);
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(-300px) translateY(-50%);
+          opacity: 0;
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        gap: 0.5rem;
+      }
+
+      nav button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo" aria-label="Lux Products Logo">
+      <img src="https://uploads.onecompiler.io/43rr3q2mf/43rqy2ywe/LOGO.png" alt="Lux Products Logo" class="logo-image" aria-hidden="true">
+      Lux Products
+    </div>
+    <nav role="tablist" aria-label="Main product categories">
+      <button role="tab" aria-selected="true" tabindex="0" data-tab="home" class="active">Home</button>
+      <button role="tab" aria-selected="false" tabindex="-1" data-tab="reviews">Reviews</button>
+      <button role="tab" aria-selected="false" tabindex="-1" data-tab="roblox">Roblox</button>
+      <button role="tab" aria-selected="false" tabindex="-1" data-tab="r6siege">Rainbow Six Siege</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Tab -->
+    <section id="home" class="tab-content active" role="tabpanel" tabindex="0" aria-labelledby="tab-home">
+      <div class="hero">
+        <h2>Welcome to Lux Products</h2>
+        <p>Lux' Up your Cheatin' experience</p>
+        <button class="btn-glow">10% DISCOUNT | LUX10</button>
+      </div>
+
+      <div class="advantages" aria-label="Key advantages">
+        <div class="advantage-card" tabindex="0">
+          <div class="adv-icon" aria-hidden="true">⚡</div>
+          <div class="adv-title">Fast & Lightweight</div>
+          <div class="adv-desc">Optimized scripts that run smoothly on all supported platforms.</div>
+        </div>
+        <div class="advantage-card" tabindex="0">
+          <div class="adv-icon" aria-hidden="true">🔒</div>
+          <div class="adv-title">Secure & Trusted</div>
+          <div class="adv-desc">Built with security in mind and trusted by thousands worldwide.</div>
+        </div>
+        <div class="advantage-card" tabindex="0">
+          <div class="adv-icon" aria-hidden="true">🎮</div>
+          <div class="adv-title">Game-Ready</div>
+          <div class="adv-desc">Tailored for competitive games like Rainbow Six Siege and more.</div>
+        </div>
+        <div class="advantage-card" tabindex="0">
+          <div class="adv-icon" aria-hidden="true">🤝</div>
+          <div class="adv-title">Support & Updates</div>
+          <div class="adv-desc">Regular updates and active Discord support to keep you ahead.</div>
+        </div>
+      </div>
+
+      <section class="faq-section" aria-label="Frequently Asked Questions">
+        <details>
+          <summary>💳 What payment methods are accepted?</summary>
+          <p>We accept PayPal, credit cards, and crypto.</p>
+        </details>
+        <details>
+          <summary>❓ How do I get product updates?</summary>
+          <p>Updates are provided automatically and announced on our Discord server.</p>
+        </details>
+        <details>
+          <summary>💸 Can I get a refund?</summary>
+          <p>Since of the digital nature of our products, we cannot give out refunds. If there are issues contact us via our discord for assistance.</p>
+        </details>
+        <details>
+          <summary>📋 Is my data safe?</summary>
+          <p>We respect your privacy and do not store personal data beyond purchase verification.</p>
+        </details>
+      </section>
+    </section>
+
+    <!-- Roblox Tab with Subsections -->
+    <section id="roblox" class="tab-content" role="tabpanel" tabindex="0" aria-labelledby="tab-roblox">
+      <div class="hero">
+        <h2>Roblox Products</h2>
+        <p>Premium scripts, executors, and externals for the ultimate Roblox experience</p>
+      </div>
+
+      <!-- Scripts Section -->
+      <div class="product-category">
+        <div class="category-header">
+          <h3>📜 Scripts</h3>
+          <p>High-quality scripts for enhanced gameplay</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="065a2982-6664-4dc5-abc7-8506350bfb15">
+            <div class="product-name">EZHUB - Blockspin Script</div>
+            <div class="product-desc">
+              A powerful script that enhances your gameplay with smooth blockspin mechanics and advanced features.
+            </div>
+            <button class="btn-buy">Buy Now</button>
+          </article>
+        </div>
+      </div>
+
+      <!-- Executors Section -->
+      <div class="product-category">
+        <div class="category-header">
+          <h3>⚙️ Executors</h3>
+          <p>Reliable and fast executors for all your scripting needs</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="1ac3afdb-4f3b-41c7-aacf-a85fe6cfc90f">
+            <div class="product-name">Potassium Executor</div>
+            <div class="product-desc">
+              Lightweight executor with fast execution and minimal resource usage. Perfect for daily use.
+            </div>
+            <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="1ac3afdb-4f3b-41c7-aacf-a85fe6cfc90f">Buy Now</button>
+          </article>
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="7ee634d1-fc3f-4961-9a04-fa524055de12">
+            <div class="product-name">Zenith Executor</div>
+            <div class="product-desc">
+              High-end executor with advanced features and multi-game support. Professional grade quality.
+            </div>
+            <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="7ee634d1-fc3f-4961-9a04-fa524055de12">Buy Now</button>
+          </article>
+        </div>
+      </div>
+
+      <!-- Externals Section -->
+      <div class="product-category">
+        <div class="category-header">
+          <h3>🔧 Externals</h3>
+          <p>External tools for advanced users seeking maximum performance</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="39ba529f-1a20-44a0-a8d1-14633e505bd0">
+            <div class="product-name">Ronin External</div>
+            <div class="product-desc">
+              A reliable external cheat with stealth features for popular games. Undetected and stable.
+            </div>
+            <button class="btn-buy">Buy Now</button>
+          </article>
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="844e3e97-dfcd-4b2d-8b50-6269767b6ab3">
+            <div class="product-name">Matcha External</div>
+            <div class="product-desc">
+              User-friendly external with smooth overlays and configurable options. Easy to use interface.
+            </div>
+            <button class="btn-buy">Buy Now</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Tab -->
+    <section id="reviews" class="tab-content" role="tabpanel" tabindex="0" aria-labelledby="tab-reviews">
+      <div class="reviews-header">
+        <h2>Customer Reviews</h2>
+        <p>These are a few handpicked reviews from some of our customers</p>
+      </div>
+      <div class="reviews-container" id="reviewsContainer">
+        <!-- Reviews will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Rainbow Six Siege Tab -->
+    <section id="r6siege" class="tab-content" role="tabpanel" tabindex="0" aria-labelledby="tab-r6siege">
+      <div class="hero">
+        <h2>Rainbow Six Siege</h2>
+        <p>Professional-grade tools for competitive R6 gameplay</p>
+      </div>
+      <div class="products-grid" aria-label="Rainbow Six Siege cheats and utilities">
+        <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="bfc9f767-c9ee-4042-8f08-2900adca4128">
+          <div class="product-name">Tateware R6</div>
+          <div class="product-desc">
+            Specialized cheat software for Rainbow Six Siege with extensive features and regular updates.
+          </div>
+          <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="bfc9f767-c9ee-4042-8f08-2900adca4128">Buy Now</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Discord Button -->
+  <a href="https://discord.gg/luxproducts" target="_blank" rel="noopener" class="discord-btn" aria-label="Join Lux Products Discord">
+    <svg class="discord-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561 19.9 19.9 0 0 0 5.993 3.0361.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057 13.0424 13.0424 0 0 1-1.872-.8887.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0786-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0814.0095c.119.099.246.1981.372.2924a.0766.0766 0 0 1-.006.1276 12.5787 12.5787 0 0 1-1.873.8888.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286 19.8765 19.8765 0 0 0 6.004-3.037.081.081 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1824 0-2.1568-1.0857-2.1568-2.419 0-1.3332.9554-2.4189 2.1568-2.4189 1.2109 0 2.1758 1.0952 2.1569 2.419 0 1.3332-.946 2.4189-2.1569 2.4189Z"
+        fill="currentColor" />
+    </svg>
+    Discord
+  </a>
+
+  <!-- SellSN Embed Script -->
+  <script type="text/javascript" src="https://pay.sellsn.io/embed.min.js"></script>
+
+  <script>
+    // Tabs logic
+    const tabs = document.querySelectorAll('nav button[role="tab"]');
+    const tabContents = document.querySelectorAll('.tab-content');
+    let currentTab = 'home';
+
+    function switchTab(newTab) {
+      if (newTab === currentTab) return;
+
+      tabs.forEach(tab => {
+        const isSelected = tab.dataset.tab === newTab;
+        tab.classList.toggle('active', isSelected);
+        tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        tab.tabIndex = isSelected ? 0 : -1;
+      });
+
+      tabContents.forEach(content => {
+        content.classList.toggle('active', content.id === newTab);
+        if (content.id === newTab) content.focus();
+      });
+
+      currentTab = newTab;
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        switchTab(tab.dataset.tab);
+        
+        // Handle reviews animation
+        if (tab.dataset.tab === 'reviews') {
+          setTimeout(startReviews, 500); // Start after tab transition
+        } else {
+          stopReviews();
+        }
+      });
+      tab.addEventListener('keydown', e => {
+        // Support arrow key navigation between tabs
+        let newIndex;
+        const index = Array.from(tabs).indexOf(e.target);
+        if (e.key === 'ArrowRight') {
+          newIndex = (index + 1) % tabs.length;
+          tabs[newIndex].focus();
+        } else if (e.key === 'ArrowLeft') {
+          newIndex = (index - 1 + tabs.length) % tabs.length;
+          tabs[newIndex].focus();
+        }
+      });
+    });
+
+    // SellSN integration - Fixed according to official documentation
+    document.addEventListener('DOMContentLoaded', function() {
+      // The SellSN embed system should work automatically with data attributes
+      // No manual JavaScript needed according to the documentation
+      
+      // Initialize the embed system (this is called automatically on load by default)
+      if (window.initializeSellSnEmbed) {
+        window.initializeSellSnEmbed();
+      }
+      
+      // Alternative initialization with delay to ensure script is loaded
+      setTimeout(() => {
+        if (window.initializeSellSnEmbed && typeof window.initializeSellSnEmbed === 'function') {
+          window.initializeSellSnEmbed();
+        }
+      }, 1000);
+    });
+
+    // Optimized falling circles animation (now on all pages)
+    let circleInterval;
+    let circlePool = [];
+    const maxCircles = 8; // Reduced for better performance
+
+    function createCircleElement() {
+      const circle = document.createElement('div');
+      circle.classList.add('falling-circle');
+      circle.style.visibility = 'hidden';
+      document.body.appendChild(circle);
+      return circle;
+    }
+
+    // Pre-create circle elements for performance
+    function initCirclePool() {
+      for (let i = 0; i < maxCircles; i++) {
+        circlePool.push(createCircleElement());
+      }
+    }
+
+    function getCircleFromPool() {
+      return circlePool.find(circle => circle.style.visibility === 'hidden') || createCircleElement();
+    }
+
+    function releaseCircleToPool(circle) {
+      circle.style.visibility = 'hidden';
+      circle.style.transform = '';
+      circle.style.opacity = '';
+    }
+
+    function createFallingCircle() {
+      const circle = getCircleFromPool();
+      
+      circle.style.left = Math.random() * 100 + 'vw';
+      circle.style.animationDuration = 4 + Math.random() * 4 + 's';
+      circle.style.width = circle.style.height = (6 + Math.random() * 8) + 'px';
+      
+      // Vary the circle colors slightly
+      const opacity = 0.6 + Math.random() * 0.4;
+      circle.style.background = `rgba(255, 255, 255, ${opacity})`;
+      circle.style.visibility = 'visible';
+
+      // Release circle back to pool after animation
+      setTimeout(() => {
+        releaseCircleToPool(circle);
+      }, 8000);
+    }
+
+    function startCircles() {
+      if (circleInterval) return;
+      initCirclePool();
+      circleInterval = setInterval(createFallingCircle, 400); // Reduced frequency for better performance
+    }
+
+    function stopCircles() {
+      if (circleInterval) {
+        clearInterval(circleInterval);
+        circleInterval = null;
+      }
+      // Hide existing circles instead of removing them
+      circlePool.forEach(circle => releaseCircleToPool(circle));
+    }
+
+    // Start circles immediately (now works on all pages)
+    startCircles();
+
+    // Reviews data and animation - OPTIMIZED
+    const reviews = [
+      { name: "Alex_Gaming", rating: 5, text: "Been using this for months, completely undetected! Great support team too." },
+      { name: "ProPlayer2024", rating: 5, text: "Ranked up like crazy with this. Updates are always fast and reliable." },
+      { name: "ShadowNinja", rating: 4, text: "Really good external, helped me a lot. Support responds quickly when needed." },
+      { name: "TechWizard", rating: 5, text: "Best executor I've used. Lightweight and never crashes, highly recommend!" },
+      { name: "GamerGirl_99", rating: 4, text: "Amazing script quality. Been closeting for weeks without any issues." },
+      { name: "RobloxKing", rating: 5, text: "Undetected for over 6 months now. These guys know what they're doing." },
+      { name: "CodeMaster", rating: 5, text: "Fast updates whenever Roblox patches. Never been let down by this team." },
+      { name: "StealthMode", rating: 4, text: "Perfect for staying under the radar. Quality products with great features." },
+      { name: "EliteHacker", rating: 5, text: "Support is incredible, helped me set everything up in minutes." },
+      { name: "NoobSlayer", rating: 4, text: "Ranked up 3 divisions this week alone. This stuff really works!" },
+      { name: "ByteRunner", rating: 5, text: "Clean interface, stable performance. Best investment I've made for gaming." },
+      { name: "PixelWarrior", rating: 4, text: "Been using for 2 months, zero detections. Very impressed with quality." },
+      { name: "CyberNinja", rating: 5, text: "Lightning fast execution and great customization options. Love it!" },
+      { name: "GameChanger", rating: 4, text: "Helped me dominate lobbies. Updates come out before I even need them." },
+      { name: "TechSavvy", rating: 5, text: "Undetected and reliable. Customer support went above and beyond." },
+      { name: "SilentAssassin", rating: 4, text: "Perfect for closet cheating. No one ever suspects a thing." },
+      { name: "QuantumGamer", rating: 5, text: "Best external I've tried. Smooth performance and regular updates." },
+      { name: "PhantomUser", rating: 4, text: "Great value for money. Support team is always helpful and friendly." },
+      { name: "RankClimber", rating: 5, text: "Climbed 5 ranks this month! This software is absolutely insane." },
+      { name: "StealthyPlayer", rating: 4, text: "Been undetected for ages. Quality is consistent and updates are quick." }
+    ];
+
+    let currentReviewIndex = 0;
+    let reviewInterval;
+    let activeReviews = new Set(); // Track active reviews to prevent overlaps
+
+    function createReviewCard(review) {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+      
+      const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+      
+      card.innerHTML = `
+        <div class="review-header">
+          <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
+          <div class="review-info">
+            <h4>${review.name}</h4>
+            <div class="review-stars">
+              ${stars.split('').map(star => `<span class="star">${star}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="review-text">${review.text}</div>
+      `;
+      
+      return card;
+    }
+
+    function showNextReview() {
+      const container = document.getElementById('reviewsContainer');
+      if (!container) return;
+      
+      // Only show if no other review is currently active (prevents overlaps)
+      if (activeReviews.size > 0) return;
+      
+      // Create new review
+      const reviewCard = createReviewCard(reviews[currentReviewIndex]);
+      const reviewId = `review-${Date.now()}`;
+      reviewCard.setAttribute('data-review-id', reviewId);
+      
+      container.appendChild(reviewCard);
+      activeReviews.add(reviewId);
+      
+      // Remove after animation completes
+      setTimeout(() => {
+        if (reviewCard.parentNode) {
+          reviewCard.remove();
+        }
+        activeReviews.delete(reviewId);
+      }, 8000); // Match animation duration
+      
+      currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+    }
+
+    function startReviews() {
+      if (reviewInterval) return;
+      
+      // Clear any existing reviews
+      const container = document.getElementById('reviewsContainer');
+      if (container) {
+        container.innerHTML = '';
+      }
+      activeReviews.clear();
+      
+      // Show first review immediately
+      showNextReview();
+      
+      // Set interval for subsequent reviews (longer interval to prevent overlaps)
+      reviewInterval = setInterval(showNextReview, 9000); // 9 seconds between reviews
+    }
+
+    function stopReviews() {
+      if (reviewInterval) {
+        clearInterval(reviewInterval);
+        reviewInterval = null;
+      }
+      
+      // Clear container and reset tracking
+      const container = document.getElementById('reviewsContainer');
+      if (container) {
+        container.innerHTML = '';
+      }
+      activeReviews.clear();
+    }
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      stopCircles();
+      stopReviews();
+    });
+  </script>
+</body>
+
+</html>
