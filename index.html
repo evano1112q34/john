@@ -741,6 +741,184 @@
       font-size: 0.95rem;
     }
 
+    /* Status Section - IMPROVED */
+    .status-section {
+      margin-bottom: 3rem;
+    }
+
+    .status-category {
+      margin-bottom: 3rem;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .status-item {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .status-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.05), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .status-item:hover::before {
+      left: 100%;
+    }
+
+    .status-info {
+      flex: 1;
+    }
+
+    .status-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+
+    .status-details {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .status-dot.green {
+      background: #10b981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+
+    .status-dot.yellow {
+      background: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+
+    .status-dot.red {
+      background: #ef4444;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .status-dot.green::after {
+      background: rgba(16, 185, 129, 0.4);
+    }
+
+    .status-dot.yellow::after {
+      background: rgba(245, 158, 11, 0.4);
+    }
+
+    .status-dot.red::after {
+      background: rgba(239, 68, 68, 0.4);
+    }
+
+    @keyframes statusPulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .status-text {
+      font-weight: 600;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .status-legend {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .status-legend h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .legend-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .legend-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    .legend-item span {
+      color: #e2e8f0;
+      font-size: 0.9rem;
+    }
+
     /* Discord Button */
     .discord-btn {
       position: fixed;
@@ -825,6 +1003,16 @@
         flex-direction: column;
       }
 
+      .status-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .status-indicator {
+        align-self: flex-end;
+      }
+
       @keyframes slideReviewOptimized {
         0% {
           transform: translateX(100vw) translateY(-50%);
@@ -871,6 +1059,7 @@
       <button role="tab" aria-selected="false" tabindex="-1" data-tab="reviews">Reviews</button>
       <button role="tab" aria-selected="false" tabindex="-1" data-tab="roblox">Roblox</button>
       <button role="tab" aria-selected="false" tabindex="-1" data-tab="r6siege">Rainbow Six Siege</button>
+      <button role="tab" aria-selected="false" tabindex="-1" data-tab="status">Status</button>
     </nav>
   </header>
 
@@ -906,20 +1095,20 @@
           <div class="featured-card" onclick="document.querySelector('[data-tab=roblox]').click()">
             <div class="featured-icon">🎮</div>
             <div class="featured-name">EZHUB Script</div>
-            <div class="featured-desc">Most advanced Blockspin Script</div>
-            <div class="featured-badge">Hot!</div>
+            <div class="featured-desc">Advanced Roblox scripting</div>
+            <div class="featured-badge">HOT</div>
           </div>
           <div class="featured-card" onclick="document.querySelector('[data-tab=roblox]').click()">
             <div class="featured-icon">⚡</div>
             <div class="featured-name">Zenith Executor</div>
-            <div class="featured-desc">100% sUNC and UNC Executor</div>
-            <div class="featured-badge">New!</div>
+            <div class="featured-desc">Premium executor</div>
+            <div class="featured-badge">NEW</div>
           </div>
           <div class="featured-card" onclick="document.querySelector('[data-tab=r6siege]').click()">
             <div class="featured-icon">🎯</div>
             <div class="featured-name">Tateware R6</div>
-            <div class="featured-desc">Best Aimbot + Esp Features</div>
-            <div class="featured-badge">Best Seller!</div>
+            <div class="featured-desc">R6 Siege enhancement</div>
+            <div class="featured-badge">PRO</div>
           </div>
         </div>
       </div>
@@ -947,12 +1136,12 @@
         </div>
       </div>
 
-      <!-- Testimonial Section -->
+      <!-- Testimonial Section - UPDATED -->
       <div class="testimonial-section">
         <h3 class="testimonial-title">What Our Users Are Saying</h3>
         <div class="testimonial-grid">
           <div class="testimonial-card">
-            <div class="testimonial-quote">"my mom started beating the shit out of me when she saw me using cheats, atleast they're undetected"</div>
+            <div class="testimonial-quote">"my mom started beating the ***** out of me when she saw me using cheats, atleast they're undetected"</div>
             <div class="testimonial-author">- spooderman909020</div>
             <div class="testimonial-rating">★★★★★</div>
           </div>
@@ -962,7 +1151,7 @@
             <div class="testimonial-rating">★★★★★</div>
           </div>
           <div class="testimonial-card">
-            <div class="testimonial-quote">"the product arived faster than i could finish pulling my meat, the jizz ended up on the order receipt"</div>
+            <div class="testimonial-quote">"the product arived faster than i could finish pulling my meat, the ***** ended up on the order receipt"</div>
             <div class="testimonial-author">- a4eo</div>
             <div class="testimonial-rating">★★★★★</div>
           </div>
@@ -989,9 +1178,133 @@
         </details>
         <details>
           <summary>📱 Do you offer mobile support?</summary>
-          <p>Currently our products are designed for Windows PC. On select products, mobile is supported to its fullest extent..</p>
+          <p>Currently our products are designed for Windows PC. Mobile versions are in development for select products.</p>
         </details>
       </section>
+    </section>
+
+    <!-- Status Tab - IMPROVED -->
+    <section id="status" class="tab-content" role="tabpanel" tabindex="0" aria-labelledby="tab-status">
+      <div class="hero">
+        <h2>System Status</h2>
+        <p>Real-time status of all Lux Products</p>
+      </div>
+
+      <!-- Status Categories -->
+      <div class="status-category">
+        <div class="category-header">
+          <h3>📜 Scripts Status</h3>
+          <p>Current status of all script products</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">EZHUB - Blockspin Script</div>
+              <div class="status-details">Last updated: 2 hours ago • Version 2.3.1</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-category">
+        <div class="category-header">
+          <h3>⚙️ Executors Status</h3>
+          <p>Current status of all executor products</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">Potassium Executor</div>
+              <div class="status-details">Last updated: 1 hour ago • Build 1.4.7</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">Zenith Executor</div>
+              <div class="status-details">Last updated: 3 hours ago • Build 3.1.2</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-category">
+        <div class="category-header">
+          <h3>🔧 Externals Status</h3>
+          <p>Current status of all external products</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">Ronin External</div>
+              <div class="status-details">Last updated: 45 minutes ago • Version 4.2.1</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">Matcha External</div>
+              <div class="status-details">Last updated: 1 hour ago • Version 2.8.3</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-category">
+        <div class="category-header">
+          <h3>🎯 Rainbow Six Siege Status</h3>
+          <p>Current status of R6 Siege products</p>
+        </div>
+        <div class="status-grid">
+          <div class="status-item">
+            <div class="status-info">
+              <div class="status-name">Tateware R6</div>
+              <div class="status-details">Last updated: 30 minutes ago • Build 5.1.4</div>
+            </div>
+            <div class="status-indicator">
+              <div class="status-dot green"></div>
+              <span class="status-text">Undetected</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Legend -->
+      <div class="status-legend">
+        <h3>Status Legend</h3>
+        <div class="legend-items">
+          <div class="legend-item">
+            <div class="status-dot green"></div>
+            <span>Undetected - Product is safe to use</span>
+          </div>
+          <div class="legend-item">
+            <div class="status-dot yellow"></div>
+            <span>Maintenance - Product is being updated</span>
+          </div>
+          <div class="legend-item">
+            <div class="status-dot red"></div>
+            <span>Detected - Do not use until further notice</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Roblox Tab with Subsections -->
@@ -1115,7 +1428,7 @@
           <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="ba760552-5d18-4fc1-8d77-c200f1282d21">
             <div class="product-name">Premium Account Package</div>
             <div class="product-desc">
-              High-quality gaming accounts with premium features and benefits. Ready to use immediately on Roblox.
+              High-quality gaming accounts with premium features and benefits. Ready to use immediately.
             </div>
             <div class="product-buttons">
               <div class="main-row">
