@@ -248,10 +248,201 @@
       color: #a1a1aa;
     }
 
+    /* Stats Section */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      transition: all 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+      border-color: rgba(59, 130, 246, 0.6);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Featured Products Section */
+    .featured-section {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .featured-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .featured-card {
+      background: linear-gradient(145deg, #0f172a, #1e293b);
+      border-radius: 1rem;
+      padding: 2rem;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .featured-card:hover::before {
+      left: 100%;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .featured-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .featured-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .featured-desc {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(90deg, #ef4444, #f59e0b);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Testimonial Section */
+    .testimonial-section {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .testimonial-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #10b981, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .testimonial-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #10b981;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-rating {
+      color: #fbbf24;
+      font-size: 1.1rem;
+    }
+
     /* FAQ Section */
     .faq-section {
       max-width: 800px;
       margin: 0 auto;
+    }
+
+    .faq-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
     details {
@@ -369,6 +560,22 @@
       user-select: text;
     }
 
+    .product-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .product-buttons .main-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .product-buttons .secondary-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
     .btn-buy {
       background: #3b82f6;
       border: none;
@@ -379,11 +586,47 @@
       cursor: pointer;
       transition: background 0.3s ease;
       user-select: none;
-      align-self: flex-start;
+      flex: 1;
     }
 
     .btn-buy:hover {
       background: #2563eb;
+    }
+
+    .btn-guide {
+      background: #10b981;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+      flex: 1;
+      font-size: 0.85rem;
+    }
+
+    .btn-guide:hover {
+      background: #059669;
+    }
+
+    .btn-showcase {
+      background: #f59e0b;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+      flex: 1;
+      font-size: 0.85rem;
+    }
+
+    .btn-showcase:hover {
+      background: #d97706;
     }
 
     /* Reviews Section - Optimized */
@@ -577,6 +820,11 @@
         padding: 1rem;
       }
 
+      .product-buttons .main-row,
+      .product-buttons .secondary-row {
+        flex-direction: column;
+      }
+
       @keyframes slideReviewOptimized {
         0% {
           transform: translateX(100vw) translateY(-50%);
@@ -635,45 +883,113 @@
         <button class="btn-glow">10% DISCOUNT | LUX10</button>
       </div>
 
+      <!-- Stats Section -->
+      <div class="stats-section">
+        <div class="stat-card">
+          <div class="stat-number">1,000+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">97.8%</div>
+          <div class="stat-label">Uptime Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Tickets Resolved</div>
+        </div>
+      </div>
+
+      <!-- Featured Products Preview -->
+      <div class="featured-section">
+        <h3 class="featured-title">🔥 Most Popular Products</h3>
+        <div class="featured-grid">
+          <div class="featured-card" onclick="document.querySelector('[data-tab=roblox]').click()">
+            <div class="featured-icon">🎮</div>
+            <div class="featured-name">EZHUB Script</div>
+            <div class="featured-desc">Advanced Roblox scripting</div>
+            <div class="featured-badge">HOT</div>
+          </div>
+          <div class="featured-card" onclick="document.querySelector('[data-tab=roblox]').click()">
+            <div class="featured-icon">⚡</div>
+            <div class="featured-name">Zenith Executor</div>
+            <div class="featured-desc">Premium executor</div>
+            <div class="featured-badge">NEW</div>
+          </div>
+          <div class="featured-card" onclick="document.querySelector('[data-tab=r6siege]').click()">
+            <div class="featured-icon">🎯</div>
+            <div class="featured-name">Tateware R6</div>
+            <div class="featured-desc">R6 Siege enhancement</div>
+            <div class="featured-badge">PRO</div>
+          </div>
+        </div>
+      </div>
+
       <div class="advantages" aria-label="Key advantages">
         <div class="advantage-card" tabindex="0">
           <div class="adv-icon" aria-hidden="true">⚡</div>
-          <div class="adv-title">Fast & Lightweight</div>
-          <div class="adv-desc">Optimized scripts that run smoothly on all supported platforms.</div>
+          <div class="adv-title">Lightning Fast</div>
+          <div class="adv-desc">Optimized for peak performance with minimal resource usage</div>
         </div>
         <div class="advantage-card" tabindex="0">
-          <div class="adv-icon" aria-hidden="true">🔒</div>
-          <div class="adv-title">Secure & Trusted</div>
-          <div class="adv-desc">Built with security in mind and trusted by thousands worldwide.</div>
+          <div class="adv-icon" aria-hidden="true">🛡️</div>
+          <div class="adv-title">Undetected</div>
+          <div class="adv-desc">Advanced stealth technology keeps you safe from anti-cheat</div>
         </div>
         <div class="advantage-card" tabindex="0">
-          <div class="adv-icon" aria-hidden="true">🎮</div>
-          <div class="adv-title">Game-Ready</div>
-          <div class="adv-desc">Tailored for competitive games like Rainbow Six Siege and more.</div>
+          <div class="adv-icon" aria-hidden="true">🚀</div>
+          <div class="adv-title">Instant Updates</div>
+          <div class="adv-desc">Real-time patches delivered within hours of game updates</div>
         </div>
         <div class="advantage-card" tabindex="0">
-          <div class="adv-icon" aria-hidden="true">🤝</div>
-          <div class="adv-title">Support & Updates</div>
-          <div class="adv-desc">Regular updates and active Discord support to keep you ahead.</div>
+          <div class="adv-icon" aria-hidden="true">💎</div>
+          <div class="adv-title">Premium Quality</div>
+          <div class="adv-desc">Hand-crafted features by experienced developers</div>
+        </div>
+      </div>
+
+      <!-- Testimonial Section -->
+      <div class="testimonial-section">
+        <h3 class="testimonial-title">What Our Users Are Saying</h3>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"yo been using lux for like 8 months now... never once got caught lmao. support team actually responds too which is wild"</div>
+            <div class="testimonial-author">- xX_ProGamer_2024</div>
+            <div class="testimonial-rating">★★★★★</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"went from silver to diamond in 2 weeks no cap 💀 this stuff is actually broken good"</div>
+            <div class="testimonial-author">- Rank_Climber_69</div>
+            <div class="testimonial-rating">★★★★★</div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"ngl best purchase i ever made for gaming. runs smooth af and never crashes on me"</div>
+            <div class="testimonial-author">- _ByteRunner_</div>
+            <div class="testimonial-rating">★★★★★</div>
+          </div>
         </div>
       </div>
 
       <section class="faq-section" aria-label="Frequently Asked Questions">
+        <h3 class="faq-title">Frequently Asked Questions</h3>
         <details>
-          <summary>💳 What payment methods are accepted?</summary>
-          <p>We accept PayPal, credit cards, and crypto.</p>
+          <summary>💳 What payment methods do you accept?</summary>
+          <p>We accept PayPal, all major credit cards, and cryptocurrency payments for maximum privacy and convenience.</p>
         </details>
         <details>
-          <summary>❓ How do I get product updates?</summary>
-          <p>Updates are provided automatically and announced on our Discord server.</p>
+          <summary>🔄 How fast are updates released?</summary>
+          <p>Our development team works around the clock. Most updates are pushed within 2-6 hours of any game patch.</p>
         </details>
         <details>
-          <summary>💸 Can I get a refund?</summary>
-          <p>Since of the digital nature of our products, we cannot give out refunds. If there are issues contact us via our discord for assistance.</p>
+          <summary>💸 What's your refund policy?</summary>
+          <p>Due to the digital nature of our products, refunds aren't available. However, our support team will help resolve any issues you encounter.</p>
         </details>
         <details>
-          <summary>📋 Is my data safe?</summary>
-          <p>We respect your privacy and do not store personal data beyond purchase verification.</p>
+          <summary>🛡️ How secure are your products?</summary>
+          <p>We use military-grade encryption and advanced obfuscation techniques. Your privacy and security are our top priorities.</p>
+        </details>
+        <details>
+          <summary>📱 Do you offer mobile support?</summary>
+          <p>Currently our products are designed for Windows PC. Mobile versions are in development for select products.</p>
         </details>
       </section>
     </section>
@@ -697,7 +1013,15 @@
             <div class="product-desc">
               A powerful script that enhances your gameplay with smooth blockspin mechanics and advanced features.
             </div>
-            <button class="btn-buy">Buy Now</button>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy">Buy Now</button>
+              </div>
+              <div class="secondary-row">
+                <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.j77l7acnulal#heading=h.rsnqcufa1m8g', '_blank')">Guide</button>
+                <button class="btn-showcase" onclick="window.open('https://www.youtube.com/watch?v=AbrKhnTtvX0', '_blank')">Showcase</button>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -714,14 +1038,29 @@
             <div class="product-desc">
               Lightweight executor with fast execution and minimal resource usage. Perfect for daily use.
             </div>
-            <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="1ac3afdb-4f3b-41c7-aacf-a85fe6cfc90f">Buy Now</button>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="1ac3afdb-4f3b-41c7-aacf-a85fe6cfc90f">Buy Now</button>
+              </div>
+              <div class="secondary-row">
+                <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.0#heading=h.d5u4qe104t47', '_blank')">Guide</button>
+              </div>
+            </div>
           </article>
           <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="7ee634d1-fc3f-4961-9a04-fa524055de12">
             <div class="product-name">Zenith Executor</div>
             <div class="product-desc">
               High-end executor with advanced features and multi-game support. Professional grade quality.
             </div>
-            <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="7ee634d1-fc3f-4961-9a04-fa524055de12">Buy Now</button>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="7ee634d1-fc3f-4961-9a04-fa524055de12">Buy Now</button>
+              </div>
+              <div class="secondary-row">
+                <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.0#heading=h.d5u4qe104t47', '_blank')">Guide</button>
+                <button class="btn-showcase" onclick="window.open('https://www.youtube.com/watch?v=w8mychbZ6Ic', '_blank')">Showcase</button>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -738,14 +1077,51 @@
             <div class="product-desc">
               A reliable external cheat with stealth features for popular games. Undetected and stable.
             </div>
-            <button class="btn-buy">Buy Now</button>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy">Buy Now</button>
+              </div>
+              <div class="secondary-row">
+                <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.bwovn9mk3444#heading=h.kweveirbu7jt', '_blank')">Guide</button>
+                <button class="btn-showcase" onclick="window.open('https://www.youtube.com/watch?v=pGsKxo_6qhg', '_blank')">Showcase</button>
+              </div>
+            </div>
           </article>
           <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="844e3e97-dfcd-4b2d-8b50-6269767b6ab3">
             <div class="product-name">Matcha External</div>
             <div class="product-desc">
               User-friendly external with smooth overlays and configurable options. Easy to use interface.
             </div>
-            <button class="btn-buy">Buy Now</button>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy">Buy Now</button>
+              </div>
+              <div class="secondary-row">
+                <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.bwovn9mk3444#heading=h.kweveirbu7jt', '_blank')">Guide</button>
+                <button class="btn-showcase" onclick="window.open('https://www.youtube.com/watch?v=FPMY5QB7kt0', '_blank')">Showcase</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Accounts Section -->
+      <div class="product-category">
+        <div class="category-header">
+          <h3>👤 Accounts</h3>
+          <p>Premium accounts for enhanced gaming experiences</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card" tabindex="0" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="ba760552-5d18-4fc1-8d77-c200f1282d21">
+            <div class="product-name">Premium Account Package</div>
+            <div class="product-desc">
+              High-quality gaming accounts with premium features and benefits. Ready to use immediately.
+            </div>
+            <div class="product-buttons">
+              <div class="main-row">
+                <button class="btn-buy">Buy Now</button>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -774,7 +1150,14 @@
           <div class="product-desc">
             Specialized cheat software for Rainbow Six Siege with extensive features and regular updates.
           </div>
-          <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="bfc9f767-c9ee-4042-8f08-2900adca4128">Buy Now</button>
+          <div class="product-buttons">
+            <div class="main-row">
+              <button class="btn-buy" data-sellsn-sid="707fd413-4052-4342-8fff-fac917837ed4" data-sellsn-gid="bfc9f767-c9ee-4042-8f08-2900adca4128">Buy Now</button>
+            </div>
+            <div class="secondary-row">
+              <button class="btn-guide" onclick="window.open('https://docs.google.com/document/d/1llYoNict-rtpAAHGznTutAyB6LlsiGWkQpIhpgjne-E/edit?tab=t.puf5vkafws67#heading=h.i45o3dyyl7m5', '_blank')">Guide</button>
+            </div>
+          </div>
         </article>
       </div>
     </section>
